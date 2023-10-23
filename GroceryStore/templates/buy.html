@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+{%block title%} Buy {%endblock%}
+{% block content %}
+  <div>
+    <h1>Summary:</h1><br>
+    <h6>Product Name: {{ product.product_name }}</h6>
+    <h6>Product Category: {{ product.section.category_name }}</h6>
+    <h6>Product Quantity: {{ quantity }}{{ units[product.unit | int] }}</h6>
+    <h6>Product Manf/Exp Date:{{ product.m_and_e_date }}</h6>
+    <h6>Total Amount to PAY: {{total}} Rs.</h6>
+    <label for="buy_and_goback">
+        <label for="buy">    
+            <form action="/buy/{{product.id}}/{{quantity}}" method="POST"><br>
+                <input class='btn btn-success' type="submit" value="BUY">
+            </form>
+        </label>
+        
+        <label for="go back">
+            <form action="/go_to_store" method="POST">
+                <input class='btn btn-light ml-2    ' type="submit" value="Go to Store">
+            </form>
+        </label>
+    </div>
+</label>
+{% endblock %}

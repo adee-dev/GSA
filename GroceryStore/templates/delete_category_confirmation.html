@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{%block title%} Delete Confirmation {%endblock%}
+{% block content %}
+<div>
+    <br><br><br>
+    <h3>Confirm Deletion</h3>
+    <p>Are you sure you want to delete?</p>
+    <br>
+    <br>
+    <form action="/delete_category/{{ id }}" method="post">
+        <button class='btn btn-danger' type="submit">Delete</button>
+        <a class='btn btn-outline-secondary' href="{{ url_for('dashboard') }}">Cancel</a>
+    </form>
+</div>
+{% endblock %}

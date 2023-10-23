@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{%block title%} User Profile {%endblock%}
+{% block content %}
+    <div>
+    {% if msg %}
+        <p style="color: green;">{{ msg }}</p>
+    {% endif %}
+    {% if error %}
+        <p style="color: red;">{{ error }}</p>
+    {% endif %}
+    <h1>Profile</h1>
+    <br>
+
+    <h3>
+        Username: {{ user.username }}
+    </h3>
+    <h3>
+        Username id: {{ user.id }}
+    </h3>
+    <br>
+    <br>
+
+    <form action="/update_username/{{ user.id }}" method="POST">
+        <label  for="update_username">Update username:</label><br>
+        <input type="text" id="update_username" name="update_username" value="{{ user.username }}">
+        <br>
+        <br>
+
+        <input class='btn btn-outline-warning' type="submit" value="Update Username">
+
+    </form>
+    <br>
+    <br>
+    <form action="/update_password/{{ user.id }}" method="POST">
+        <label for="update_password">Update Password:</label><br>
+        <label for="update_username">Enter a new Password:</label>
+        <input type="password" id="update_password" name="update_password" ><br><br>
+        <label for="confirm_password">Confirm new Password:</label>
+        <input type="password" id="confirm_password" name="confirm_password" >
+        <br>
+        <br>
+        <input class='btn btn-outline-warning' type="submit" value="Update Password">
+
+    </form>
+    <br><br>
+    <form action="/go_to_store" method="POST">
+        <input class='btn btn-dark' type="submit" value="Go to Store">
+    </form>
+    <br>
+    <a class='btn btn-danger' type="button" href="/" style="text-decoration: none">Logout&nbsp&nbsp</a>
+
+    </div>
+{% endblock %}

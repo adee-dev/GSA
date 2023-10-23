@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{%block title%} Update Product {%endblock%}
+{% block content %}
+<div>
+    <br>
+    <br>
+    <h1>Update Product</h1>
+    <form action="/update_product/{{ product.id }}/{{ product.cat }}" method="POST">
+        <label for="product_name">Product name:</label><br>
+        <input type="text" id="product_name" name="product_name" value="{{ product.product_name }}" required><br>
+
+        <label for="unit">Unit:</label><br>
+        <select name="unit" id="unit"><br>
+            {% for k, v in units.items() %}
+                <option value="{{ k }}">{{ v }}</option>
+            {% endfor %}
+        </select>
+        <br>
+        <label for="m_and_e_date">m_and_e_date:</label><br>
+        <input type="text" id="m_and_e_date" name="m_and_e_date" value="{{ product.m_and_e_date }}"required><br>
+
+        <label for="product_price">Product Price:</label><br>
+        <input type="text" id="product_price" name="product_price" value="{{ product.price }}" required><br>
+
+        <label for="product_quantity">Product Quantity:</label><br>
+        <input type="text" id="product_quantity" name="product_quantity" value="{{ product.quantity }}" required><br>
+
+        <br>
+        <input class='btn btn-success' type="submit" value="Update +">
+    </form>
+</div>
+{% endblock %}

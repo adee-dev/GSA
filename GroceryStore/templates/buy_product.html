@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{%block title%} Buy Product {%endblock%}
+{% block content %}
+    <div>
+        <br>
+        <br>
+        <br>
+        {% if error %}
+            <p style="color: red;">{{ error }}</p>
+        {% endif %}
+    <h1>{{ product.product_name }}&nbsp-&nbsp({{ product.section.category_name }}) </h1>
+    <form action="/buy_product/{{ product.id }}" method="POST">
+        {% if (product.quantity | int) > 0 %}
+        <label for="availability">Availability: <label style='color:green   '>In Stock</label></label><br>
+
+        <label for="product_quantity">Product Quantity:</label>
+        <input type="text" id="product_quantity" name="product_quantity" required>&nbsp&nbsp
+        <label for="product_quantity">{{ units[product.unit | int] }}</label>
+
+        <br>
+        <label for="product_price">Product Price:</label>
+        <label for="product_price">{{ product.price }}</label>
+        <br>
+        <label for="m_and_e_date">Manf/Exp Date:</label>
+        <label for="m_and_e_date">{{ product.m_and_e_date }}</label>
+        {% else %}
+
+        {% endif %}
+        <br>
+        <br>
+
+        <input class='btn btn-success' type="submit" value="Proceed to Buy >>>">
+    </form>
+    <br>
+
+    <form action="/go_to_store" method="POST">
+        <input class='btn btn-light' type="submit" value="Go to Store">
+    </form>
+    </div>
+{% endblock %}

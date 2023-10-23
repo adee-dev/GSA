@@ -1,0 +1,41 @@
+{% extends 'base.html' %}
+{%block title%} AD's Dashboard {%endblock%}
+{% block content %}
+<div>
+    <div class="container text-center">
+        <h1>AD's Dashboard</h1>
+        <a type="button" class='btn btn-outline-primary' href="/" >Logout</a>
+        
+        {% if categories|length==0 %}
+        <h1>No categories found</h1>
+        {% else %}
+    </div>
+    <br>
+    <h1>Categories:</h1>
+    <table>
+        <tr>
+            <th>Id&nbsp&nbsp</th>
+            
+            <th>&nbspName</th>
+            <th></th>
+            <th>&nbsp&nbsp&nbsp&nbsp&nbspActions</th>
+            <th></th>
+        </tr>
+            {% for category in categories %}
+            <tr>
+                <td>{{ category.id }}</td>
+                
+                <td><a class='btn btn-link' href="/view_products/{{ category.id }}">{{ category.category_name }}</a></td>
+                <td></td>
+                <td>
+                    &nbsp&nbsp<a type='button' class='btn btn-outline-info' href="/update_category/{{ category.id }}">&nbspUpdate</a>
+                    &nbsp<a type='button' class='btn btn-outline-danger' href="/delete_category_confirmation/{{ category.id }}">Delete</a>
+                </td>    
+                </tr>
+                {% endfor %}
+            </table>
+            {% endif %}
+            <br><br>
+            <a type='button' class='btn btn-success' href="{{ url_for('add_category') }}">Add Category +</a>
+        </div>
+{% endblock %}

@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{%block title%} Cart {%endblock%}
+{% block content %}
+    <div>
+    <br>
+    <br>
+    <h1>My Cart</h1>
+    <hr>
+    {% for error in errors %}
+    {% if error %}
+    <p style="color: red;">{{ error }}</p>
+    {% endif %}
+    {% if msg %}
+        <p style="color: green;">{{ msg }}</p>
+    {% endif %}
+    {% endfor %}
+    <form action="/buy_all/{{ carted_products | length }}" method="POST">
+        {% for product, sno  in z %}
+        {% if (product.quantity | int) > 0 %}
+        <label for="product_name">Product Name: {{ product.product_name }}</label><br>
+        <label for="availability">Availability: <label style='color:green   '>In Stock</label></label><br>
+
+        <label for="product_quantity">Product Quantity:</label>
+        <input type="text" id="product_quantity" name="product_quantity{{ sno }}" value=1 required>&nbsp&nbsp
+        <label for="product_quantity">{{ units[product.unit | int] }}</label>
+
+        <br>
+        <label for="product_price">Product Price:</label>
+        <label for="product_price">{{ product.price }}</label><br>
+        
+        <label for="m_and_e_date">Manf/Exp Date:</label>
+        <label for="m_and_e_date">{{ product.m_and_e_date }}</label><br><br>
+        <label class ='btn btn-sm btn-outline-danger' for="remove_from_cart"><a href="/remove_from_cart/{{ product.id }}" style="text-decoration: none; color:white">Remove from Cart</a></label>&nbsp&nbsp&nbsp&nbsp&nbsp
+        <label class ='btn btn-sm btn-outline-success' for="review"><a href="/buy_product/{{ product.id }}" style="text-decoration: none; color:white">Review and Buy</a></label><br><br>
+        <hr>
+        {% else %}
+        
+        {% endif %}
+        <br>
+        <br>
+        {% endfor %}
+
+        <input class ='btn btn-sm btn-success' type="submit" value="Proceed to Buy >>>">
+    </form>
+    <br>
+
+    <form action="/go_to_store" method="POST">
+        <input class ='btn btn-sm btn-light' type="submit" value="Go to Store">
+        
+    </form>
+        <br>
+    </div>
+{% endblock %}

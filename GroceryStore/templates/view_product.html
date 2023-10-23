@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{%block title%} View Products {%endblock%}
+{% block content %}
+    <br><br><br><br><br>
+    {% if products|length==0 %}
+        <h1>No products found</h1>
+    {% else %}
+        <h1>Products:</h1>
+        <table>
+            <tr>
+                <th>Id</th>
+                <th>&nbsp&nbspName</th>
+                <th>&nbspActions</th>
+            </tr>
+            {% for product in products %}
+                {% if product.cat == id %}
+                <tr>
+                    <td>{{ product.id }}</td>
+                    <td>&nbsp&nbsp{{ product.product_name }}</td>
+                    <td>
+                        &nbsp<a type='button' class='btn btn-outline-info' href="/update_product/{{ product.id }}/{{ product.cat }}">Update</a>
+                        &nbsp<a type='button' class='btn btn-outline-danger' href="/delete_confirmation/{{ product.id }}/{{ product.cat }}">Delete</a>
+                    </td>
+                    
+                </tr>
+                {% endif %}
+            {% endfor %}
+        </table>
+    {% endif %}
+    <br>
+    <label >
+        <a type='button' class='btn btn-success' href="/create_product/{{ id }}">Add Product +</a>
+    </label>&nbsp
+    <label >
+        <a type='button' class='btn btn-outline-secondary' href="/dashboard">Categories</a>
+    </label>
+
+{% endblock %}

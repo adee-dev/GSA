@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+{%block title%} Thank You {%endblock%}
+{% block content %}
+  <div>
+    <br>
+    <br>
+    <br>
+<h1>
+    Thank you for your purchase!
+</h1>
+    <br>
+    <br>
+
+    <form action="/go_to_store" method="POST">
+        <center>
+            <input class ='btn btn-sm btn-outline-dark' type="submit" value="Go to Store">
+        </center>
+
+    </form>
+    </div>
+{% endblock %}

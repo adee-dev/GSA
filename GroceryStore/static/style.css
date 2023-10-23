@@ -1,0 +1,53 @@
+html {
+  display: table;
+  margin: auto;
+}
+
+body {
+  vertical-align: middle;
+  height: 100vh;
+}
+
+.btn-space {
+  margin-right: 10px;
+}
+
+.container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.table-container {
+  margin-top: 20px;
+}
+
+.table-container table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.table-container th,
+.table-container td {
+  padding: 10px;
+  text-align: left;
+  border-bottom: 1px solid #ddd;
+}
+
+.table-container th {
+  background-color: #f2f2f2;
+}
+
+.actions {
+  display: flex;
+}
+
+.actions a {
+  margin-right: 10px;
+}
+
+

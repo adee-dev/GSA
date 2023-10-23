@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{%block title%} Store {%endblock%}
+{% block content %}
+  <div>
+    <br>
+    <br>
+    {% if user.username %}
+    
+      <h2>{{ user.username }}'s Dashboard</h2>
+      <a type="button" class='btn btn-primary mr-2' href="/profile/{{ user.id }}" style="text-decoration: none">Profile</a>
+      <a type="button" class='btn btn-info btn-space mr-2' href="/add_to_cart/{{ user.id }}" style="text-decoration: none">Cart</a>
+    <a type="button" class='btn btn-outline-danger' href="/" style="text-decoration: none">Logout</a>
+    <br>
+    <br>
+    <form action="/search" method="POST">
+        <input type="text" name="search">
+        <input class='btn-sm mr-2' type="submit" value="Search">&nbsp&nbsp
+        <p>(You can search product by their name, category, price and manufacturing date also!)</p>
+    </form>
+    <br />
+    <br />
+    {% if categories|length==0 %}
+
+    <h1>No categories found</h1>
+    {% else %}
+    <h1>Categories:</h1>
+    <table>
+      {% for category in categories %}
+      <tr>
+        <td><h3>{{ category.category_name }}:-</h3></td>
+        <td>
+          {% for product in products %} {% if product.cat == category.id %}
+          <tr>
+            <td>===================></td>
+            <td>{{ product.product_name }}</td>
+            <td></td>
+            {% if product.unit == '1' %}
+            <td>{{ product.price }}{{ units[1] }}&nbsp&nbsp</td>
+            {% elif product.unit == '0' %}
+            <td>{{ product.price }}{{ units[0] }}&nbsp&nbsp</td>
+            {% elif product.unit == '2' %}
+            <td>{{ product.price }}{{ units[2] }}&nbsp&nbsp</td>
+            {% elif product.unit == '3' %}
+            <td>{{ product.price }}{{ units[3] }}&nbsp&nbsp</td>
+            {% endif %} {% if product.quantity==0 %}
+            <td>Out of Stock!</td>
+            
+            <br>
+            {% else %}
+            
+            <td>
+              <br>
+              <form action="/buy_product/{{ product.id }}" method="">
+                <input class ='btn btn-sm btn-outline-success' type="submit" value="  BUY Product  " />
+              </form>
+              
+              <form action="/add_to_cart/{{ product.id }}" method="POST">
+                <input class ='btn btn-sm btn-outline-info' type="submit" value="Add to Cart +" />
+              </form>
+              <br>
+              
+              {% endif %}
+            </td>
+          </tr>
+          {% endif %} {% endfor %}
+        </td>
+      </tr>
+      {% endfor %}
+      
+    </table>
+    <br>
+    {% endif %}
+
+    {% else %}
+      <h2>Please Login again with new username: <a href="{{ url_for('login') }}">Login here</a></h2>
+      {% endif %}
+
+    </div>
+{% endblock %}

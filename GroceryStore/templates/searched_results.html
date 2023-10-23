@@ -1,0 +1,170 @@
+{% extends 'base.html' %}
+{%block title%} Searched Results {%endblock%}
+{% block content %}
+    <div>
+  <h1>Searched Results</h1>
+  {% if product %}
+      <h1>Products:</h1>
+    <table>
+      {% for prod in product %}
+      <tr>
+        <td>==================></td>
+        <td><h3>{{ prod.product_name }}:-</h3></td>
+
+        {% if prod.unit == '1' %}
+        <td>{{ prod.price }}{{ units[1] }}&nbsp&nbsp</td>
+        {% elif prod.unit == '0' %}
+        <td>{{ prod.price }}{{ units[0] }}&nbsp&nbsp</td>
+        {% elif prod.unit == '2' %}
+        <td>{{ prod.price }}{{ units[2] }}&nbsp&nbsp</td>
+        {% elif prod.unit == '3' %}
+        <td>{{ prod.price }}{{ units[3] }}&nbsp&nbsp</td>
+        {% endif %} 
+
+        {% if prod.quantity == 0 %}
+        <td>Out of Stock!</td>
+        {% else %}
+        <td>
+            <form action="/buy_product/{{ prod.id }}" method="">
+              <input class ='btn btn-sm btn-outline-success' type="submit" value="  BUY Product  " />
+            </form>
+   
+            <form action="/add_to_cart/{{ prod.id }}" method="POST">
+              <input class ='btn btn-sm btn-outline-info' type="submit" value="Add to Cart +" />
+            </form>
+            <br>
+
+        </td>
+        {% endif %}
+      </tr>
+      {% endfor %}
+    </table>
+
+
+
+  {% elif category %}
+    {% for cat in category %}
+      <table>
+        <td><h3>{{ cat.category_name }}:-</h3></td>
+        {% for product in cat_products %} {% if product.cat == cat.id %}
+          <tr>
+            <td>===================></td>
+            <td>{{ product.product_name }}</td>
+
+            <td></td>
+            {% if product.unit == '1' %}
+            <td>{{ product.price }}{{ units[1] }}&nbsp&nbsp</td>
+            {% elif product.unit == '0' %}
+            <td>{{ product.price }}{{ units[0] }}&nbsp&nbsp</td>
+            {% elif product.unit == '2' %}
+            <td>{{ product.price }}{{ units[2] }}&nbsp&nbsp</td>
+            {% elif product.unit == '3' %}
+            <td>{{ product.price }}{{ units[3] }}&nbsp&nbsp</td>
+            {% endif %} {% if product.quantity==0 %}
+            <td>Out of Stock!</td>
+            {% else %}
+            <td>
+              <form action="/buy_product/{{ product.id }}" method="">
+                <input class ='btn btn-sm btn-outline-success' type="submit" value="  BUY Product  " />
+              </form>
+              
+              <form action="/add_to_cart/{{ product.id }}" method="POST">
+                <input class ='btn btn-sm btn-outline-info' type="submit" value="Add to Cart +" />
+              </form>
+              <br>
+
+              {% endif %}
+            </td>
+          </tr>
+        {% endif %}
+        {% endfor %}
+
+      </table>
+    {% endfor %}
+
+
+  {% elif product_price!=-1 %}
+
+    <h1>Products:</h1>
+    <table>
+      {% for product in product_price %}
+      <tr>
+        <td>==================></td>
+        <td><h3>{{ product.product_name }}:-</h3></td>
+
+        {% if product.unit == '1' %}
+        <td>{{ product.price }}{{ units[1] }}&nbsp&nbsp</td>
+        {% elif product.unit == '0' %}
+        <td>{{ product.price }}{{ units[0] }}&nbsp&nbsp</td>
+        {% elif product.unit == '2' %}
+        <td>{{ product.price }}{{ units[2] }}&nbsp&nbsp</td>
+        {% elif product.unit == '3' %}
+        <td>{{ product.price }}{{ units[3] }}&nbsp&nbsp</td>
+        {% endif %} 
+
+        {% if product.quantity == 0 %}
+        <td>Out of Stock!</td>
+        {% else %}
+        <td>
+            <form  action="/buy_product/{{ product.id }}" method="">
+              <input class ='btn btn-sm btn-outline-success' type="submit" value="  BUY Product  " />
+            </form>
+   
+            <form action="/add_to_cart/{{ product.id }}" method="POST">
+              <input class ='btn btn-sm btn-outline-info' type="submit" value="Add to Cart +" />
+            </form>
+            <br>
+        </td>
+        {% endif %}
+      </tr>
+      {% endfor %}
+    </table>
+
+
+  {% elif product_me_date %}
+
+    <h1>Products:</h1>
+    <table>
+      {% for product in product_me_date %}
+      <tr>
+        <td>==================></td>
+        <td><h3>{{ product.product_name }}:-</h3></td>
+
+        {% if product.unit == '1' %}
+        <td>{{ product.price }}{{ units[1] }}&nbsp&nbsp</td>
+        {% elif product.unit == '0' %}
+        <td>{{ product.price }}{{ units[0] }}&nbsp&nbsp</td>
+        {% elif product.unit == '2' %}
+        <td>{{ product.price }}{{ units[2] }}&nbsp&nbsp</td>
+        {% elif product.unit == '3' %}
+        <td>{{ product.price }}{{ units[3] }}&nbsp&nbsp</td>
+        {% endif %} 
+
+        {% if product.quantity == 0 %}
+        <td>Out of Stock!</td>
+        {% else %}
+        <td>
+            <form action="/buy_product/{{ product.id }}" method="">
+              <input class ='btn btn-sm btn-outline-success' type="submit" value="  BUY Product  " />
+            </form>
+   
+            <form action="/add_to_cart/{{ product.id }}" method="POST">
+              <input class ='btn btn-sm btn-outline-info' type="submit" value="Add to Cart +" />
+            
+            </form>
+            <br>
+
+        </td>
+        {% endif %}
+      </tr>
+      {% endfor %}
+    </table>
+
+  {% else %}
+    <h3>Please enter valid details, your search is not available</h3>
+  {% endif %}
+      <form action="/go_to_store" method="POST">
+        <input class ='btn btn-sm btn-dark' type="submit" value="Go to Store">
+    </form>
+    </div>
+{% endblock %}
